@@ -1,0 +1,37 @@
+#服务器端口
+server:
+  port: 9080
+  servlet:
+    context-path: /api
+
+mt:
+  datasource:
+    mysql:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.207.228:3306/mt-entity?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: 123456
+      validation-query: SELECT 1
+  shiro:
+    skipUrl:
+      - /test
+      - /attachment/**
+      - /resources/**
+  file:
+    storage-path: D:/data/resources
+    uri-prefix: http://localhost:8081/api/resources/
+  captcha: false
+
+#数据源配置
+spring:
+  datasource:
+    driver-class-name: ${mt.datasource.mysql.driver-class-name}
+    url: ${mt.datasource.mysql.url}
+    username: ${mt.datasource.mysql.username}
+    password: ${mt.datasource.mysql.password}
+    druid:
+      validation-query: ${mt.datasource.mysql.validation-query}
+  mvc:
+    static-path-pattern: /resources/**
+  resources:
+    static-locations: file:${mt.file.storage-path}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cntomorrow.modules.test.mapper.TestMapper">
+
+    <select id="pageWithWrapper" resultType="java.util.Map">
+        select
+            id as "id",
+            dept_id as "deptId",
+            deptName as "deptId"
+
+        from test ${ew.customSqlSegment}
+    </select>
+
+    <select id="pageWithMap" resultType="java.util.Map">
+        select
+            id as "id",
+            dept_id as "deptId",
+            deptName as "deptId"
+
+        from test
+            where id = #{params.id}
+    </select>
+</mapper>

@@ -1,0 +1,8 @@
+version: '3'
+services:
+  mt-admin:
+    build: ./
+    ports:
+      - 8090:8090
+    privileged: true
+    restart: always

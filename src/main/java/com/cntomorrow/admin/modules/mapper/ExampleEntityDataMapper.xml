@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cntomorrow.admin.modules.mapper.ExampleEntityDataMapper">
+
+    <select id="page" resultType="java.util.Map">
+        SELECT
+        <foreach collection="cols" item="item" index="index" open="" separator="," close="">
+            ${item}
+        </foreach>,
+               (select code from tableB where id=t.id) as "code"
+        FROM
+            sys_user t
+            <where>
+                ${ew.sqlSegment}
+                and create_user=#{user.id}
+            </where>
+    </select>
+
+</mapper>
