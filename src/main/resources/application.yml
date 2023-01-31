@@ -30,7 +30,8 @@ spring:
 #  resources:
 #    add-mappings: false
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.207.118:5432/ghkt?stringtype=unspecified
     druid:
       initial-size: 5
       max-active: 20
@@ -44,7 +45,7 @@ spring:
       test-while-idle: true
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 300000
-      filters: stat,wall
+      #filters: stat,wall
       stat-view-servlet:
         enabled: true
         login-username: admin
@@ -97,6 +98,22 @@ mybatis-plus:
     cache-enabled: false
     #配置JdbcTypeForNull, oracle数据库必须配置
     jdbc-type-for-null: 'null'
-
-
-
+    #设置字段全量显示
+    call-setters-on-nulls: true
+ftp:
+  host: 10.62.31.9
+  #host: 192.168.1.150
+  port: 21
+  dataURL: /sanma/day/GDATABUS/
+  reportList: /sanma/month/
+  userName: jtywftp
+  password: JTywftp@2020
+  localFilePath: /home/hsmt/sanmafile/dataFile/
+  #localFilePath: D:\Java\File\text\
+file:
+  fk_dir:
+  #通过附件ID获取附件信息地址
+  qryUploadFileByFileId: http://10.62.60.200:9600/serviceAgent/http/6090013055/qryUploadFileByFileId
+mail:
+  smsUrl: http://10.62.233.150:7070/SendMessageTimely/sendmessage/sendmessage
+  smsSendType: SENDTYPE2
