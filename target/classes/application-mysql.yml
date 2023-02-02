@@ -1,0 +1,37 @@
+#服务器端口
+server:
+  port: 9080
+  servlet:
+    context-path: /jfsc-server
+
+mt:
+  datasource:
+    mysql:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://124.223.47.38:3306/integralapp?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: Jfsc!Qqaazz
+      validation-query: SELECT 1
+  shiro:
+    skipUrl:
+      - /test
+      - /attachment/**
+      - /resources/**
+  file:
+    storage-path: D:/data/resources
+    uri-prefix: http://localhost:8081/api/resources/
+  captcha: false
+
+#数据源配置
+spring:
+  datasource:
+    driver-class-name: ${mt.datasource.mysql.driver-class-name}
+    url: ${mt.datasource.mysql.url}
+    username: ${mt.datasource.mysql.username}
+    password: ${mt.datasource.mysql.password}
+    druid:
+      validation-query: ${mt.datasource.mysql.validation-query}
+  mvc:
+    static-path-pattern: /resources/**
+  resources:
+    static-locations: file:${mt.file.storage-path}

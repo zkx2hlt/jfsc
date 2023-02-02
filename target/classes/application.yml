@@ -1,0 +1,58 @@
+#服务器配置
+server:
+  undertow:
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    buffer-size: 1024
+    # 是否分配的直接内存
+    direct-buffers: true
+    threads:
+      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+      io: 4
+      # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+      worker: 20
+
+#spring配置
+spring:
+  # 环境 dev|test|prod
+  profiles:
+    active: mysql
+  # jackson时间格式化
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  mvc:
+    throw-exception-if-no-handler-found: true
+  thymeleaf:
+      prefix: classpath:/templates
+      check-template-location: true
+      cache: false
+      suffix: .jsp
+      encoding: UTF-8
+      mode: HTML
+      servlet:
+        content-type: text/html
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:com.cntomrrow.project.modules/**/mapper/.xml
+  #实体扫描，多个package用逗号或者分号分隔(pojo)
+  #typeAliasesPackage: com.cntomorrow.project.modules.*.entity
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: AUTO
+      logic-delete-value: -1
+      logic-not-delete-value: 0
+    banner: false
+  #原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+#打印sql
+logging:
+   level:
+     com.cntomrrow.project.modules.mapper: trace    
+
+    

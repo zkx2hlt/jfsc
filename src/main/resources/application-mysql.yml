@@ -2,15 +2,15 @@
 server:
   port: 9080
   servlet:
-    context-path: /api
+    context-path: /jfsc-server
 
 mt:
   datasource:
     mysql:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://192.168.207.228:3306/mt-entity?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://124.223.47.38:3306/integralapp?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
-      password: 123456
+      password: Jfsc!Qqaazz
       validation-query: SELECT 1
   shiro:
     skipUrl:
